@@ -3,1100 +3,635 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BotDone.com - Where Automation Gets Done</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #ffffff;
-            --secondary: #ff6b35;
-            --accent: #ff8e53;
-            --light: #f8f9fa;
-            --dark: #2c3e50;
-            --gray: #6c757d;
-            --light-gray: #e9ecef;
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            --gradient: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
-            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            --shadow-hover: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Tajawal', sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            background-color: var(--primary);
-            overflow-x: hidden;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        section {
-            padding: 100px 0;
-            position: relative;
-        }
-
-        h1, h2, h3, h4 {
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-
-        h1 {
-            font-size: 4rem;
-            color: var(--dark);
-        }
-
-        h2 {
-            font-size: 3rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-            color: var(--dark);
-        }
-
-        h2:after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            right: 50%;
-            transform: translateX(50%);
-            width: 80px;
-            height: 4px;
-            background: var(--gradient);
-            border-radius: 4px;
-        }
-
-        h3 {
-            font-size: 1.8rem;
-            color: var(--dark);
-        }
-
-        p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            color: var(--gray);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 15px 35px;
-            background: var(--gradient);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            box-shadow: var(--shadow);
-        }
-
-        .btn:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 0%;
-            height: 100%;
-            background: var(--accent);
-            transition: var(--transition);
-            z-index: -1;
-        }
-
-        .btn:hover:before {
-            width: 100%;
-        }
-
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--secondary);
-            color: var(--secondary);
-        }
-
-        .btn-outline:before {
-            background: var(--secondary);
-        }
-
-        .btn-outline:hover {
-            color: white;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .highlight {
-            color: var(--secondary);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 120px 0 100px;
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 4.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero h1 span {
-            color: var(--secondary);
-        }
-
-        .hero h2 {
-            font-size: 2.2rem;
-            margin-bottom: 2rem;
-            color: var(--dark);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2.5rem;
-            color: var(--gray);
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 2rem;
-        }
-
-        .ai-pattern {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.1;
-            z-index: 1;
-        }
-
-        .ai-node {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: var(--secondary);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        .ai-connection {
-            position: absolute;
-            height: 1px;
-            background: var(--secondary);
-            transform-origin: 0 0;
-            opacity: 0.7;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 0.7; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        /* Brand Meaning Section */
-        .brand-meaning {
-            background: var(--light);
-        }
-
-        .meaning-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-        }
-
-        .meaning-box {
-            flex: 1;
-            min-width: 300px;
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .meaning-box:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 5px;
-            height: 100%;
-            background: var(--gradient);
-            transition: var(--transition);
-            z-index: -1;
-        }
-
-        .meaning-box:hover:before {
-            width: 100%;
-            opacity: 0.05;
-        }
-
-        .meaning-box:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .meaning-box h3 {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .meaning-box h3 i {
-            margin-left: 10px;
-            color: var(--secondary);
-            font-size: 2rem;
-        }
-
-        .meaning-list {
-            list-style: none;
-        }
-
-        .meaning-list li {
-            margin-bottom: 10px;
-            padding-right: 20px;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .meaning-list li:before {
-            content: '▸';
-            position: absolute;
-            right: 0;
-            color: var(--secondary);
-            font-weight: bold;
-        }
-
-        .meaning-list li:hover {
-            transform: translateX(-5px);
-        }
-
-        .brand-equation-container {
-            text-align: center;
-            margin: 40px 0;
-            width: 100%;
-        }
-
-        .brand-equation {
-            display: inline-block;
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--secondary);
-            padding: 15px 40px;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            background: white;
-            text-align: center;
-            margin: 0 auto;
-        }
-
-        .brand-uses {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 40px;
-        }
-
-        .use-tag {
-            background: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            color: var(--dark);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            cursor: pointer;
-            border: 1px solid var(--light-gray);
-        }
-
-        .use-tag:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-            background: var(--gradient);
-            color: white;
-        }
-
-        /* Use Cases Section */
-        .use-cases {
-            background: white;
-        }
-
-        .cases-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .case-card {
-            background: white;
-            border-radius: 15px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 1px solid var(--light-gray);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .case-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 0;
-            background: var(--gradient);
-            opacity: 0.05;
-            transition: var(--transition);
-            z-index: -1;
-        }
-
-        .case-card:hover:before {
-            height: 100%;
-        }
-
-        .case-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--secondary);
-        }
-
-        .case-icon {
-            font-size: 3rem;
-            color: var(--secondary);
-            margin-bottom: 25px;
-            transition: var(--transition);
-        }
-
-        .case-card:hover .case-icon {
-            transform: scale(1.2);
-        }
-
-        .case-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        /* Premium Domain Section */
-        .premium-domain {
-            background: var(--light);
-        }
-
-        .premium-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .premium-points {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 50px;
-        }
-
-        .premium-point {
-            background: white;
-            padding: 30px 20px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .premium-point:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .premium-point i {
-            font-size: 2.5rem;
-            color: var(--secondary);
-            margin-bottom: 20px;
-            transition: var(--transition);
-        }
-
-        .premium-point:hover i {
-            transform: scale(1.2);
-        }
-
-        /* Future Section */
-        .future-automation {
-            background: linear-gradient(135deg, var(--dark) 0%, #34495e 100%);
-            color: white;
-            text-align: center;
-        }
-
-        .future-automation h2 {
-            color: white;
-        }
-
-        .future-automation h2:after {
-            background: var(--secondary);
-        }
-
-        .future-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .future-stats {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin-top: 60px;
-        }
-
-        .stat {
-            margin: 20px;
-        }
-
-        .stat-number {
-            font-size: 4rem;
-            font-weight: 700;
-            color: var(--secondary);
-        }
-
-        .stat-label {
-            font-size: 1.3rem;
-            margin-top: 15px;
-            color: var(--light-gray);
-        }
-
-        /* Contact Section */
-        .contact {
-            background: white;
-        }
-
-        .contact-box {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--light);
-            padding: 50px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .contact-box:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient);
-            z-index: 2;
-        }
-
-        .contact-email {
-            font-size: 1.8rem;
-            margin: 25px 0;
-            color: var(--secondary);
-            font-weight: 700;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--dark);
-            text-decoration: none;
-            transition: var(--transition);
-            padding: 10px 20px;
-            border-radius: 30px;
-            background: white;
-            box-shadow: var(--shadow);
-        }
-
-        .social-link:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-            color: var(--secondary);
-        }
-
-        .serious-note {
-            font-size: 0.9rem;
-            color: var(--gray);
-            margin-top: 25px;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 60px 0 30px;
-            text-align: center;
-        }
-
-        .footer-logo {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
-
-        .footer-logo span {
-            color: var(--secondary);
-            position: relative;
-        }
-
-        .footer-logo span:after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            right: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--gradient);
-            border-radius: 3px;
-        }
-
-        .copyright {
-            margin-top: 30px;
-            color: var(--light-gray);
-            font-size: 0.9rem;
-        }
-
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Navigation Dots */
-        .nav-dots {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .nav-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--light-gray);
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .nav-dot.active {
-            background: var(--secondary);
-            transform: scale(1.3);
-        }
-
-        .nav-dot:hover:after {
-            content: attr(data-section);
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--dark);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            white-space: nowrap;
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            h1 {
-                font-size: 3.5rem;
-            }
-            
-            h2 {
-                font-size: 2.5rem;
-            }
-            
-            .hero h1 {
-                font-size: 4rem;
-            }
-            
-            .nav-dots {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn {
-                width: 100%;
-                max-width: 280px;
-                margin-bottom: 15px;
-            }
-            
-            h1 {
-                font-size: 3rem;
-            }
-            
-            h2 {
-                font-size: 2.2rem;
-            }
-            
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-            
-            .brand-equation {
-                font-size: 2rem;
-                padding: 12px 30px;
-            }
-            
-            .social-links {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        @media (max-width: 576px) {
-            section {
-                padding: 80px 0;
-            }
-            
-            .hero {
-                padding: 100px 0 80px;
-            }
-            
-            .hero h1 {
-                font-size: 3rem;
-            }
-            
-            .hero h2 {
-                font-size: 1.8rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .meaning-box, .case-card, .premium-point {
-                padding: 30px 20px;
-            }
-            
-            .contact-box {
-                padding: 40px 30px;
-            }
-            
-            .brand-equation {
-                font-size: 1.8rem;
-                padding: 10px 25px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Navigation Dots -->
-    <div class="nav-dots">
-        <div class="nav-dot active" data-section="الرئيسية" onclick="scrollToSection('hero')"></div>
-        <div class="nav-dot" data-section="معنى الاسم" onclick="scrollToSection('meaning')"></div>
-        <div class="nav-dot" data-section="الاستخدامات" onclick="scrollToSection('usecases')"></div>
-        <div class="nav-dot" data-section="مميزات الدومين" onclick="scrollToSection('premium')"></div>
-        <div class="nav-dot" data-section="المستقبل" onclick="scrollToSection('future')"></div>
-        <div class="nav-dot" data-section="التواصل" onclick="scrollToSection('contact')"></div>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="ai-pattern" id="aiPattern"></div>
-        <div class="container">
-            <div class="hero-content fade-in">
-                <h1>Bot<span>Done</span>.com</h1>
-                <h2>Where Automation Gets Done</h2>
-                <p>اسم يجمع بين كلمة <span class="highlight">Bot</span> التي تعكس الأتمتة والذكاء الاصطناعي، وكلمة <span class="highlight">Done</span> التي تعبّر عن الإنجاز والإتمام بجودة عالية. النتيجة: براند جاهز ليكون منصة ذكاء اصطناعي تعتمد عليه الشركات لإنجاز المهام بشكل تلقائي.</p>
-                <div class="hero-buttons">
-                    <a href="#contact" class="btn">Contact for acquisition</a>
-                    <a href="#usecases" class="btn btn-outline">View use-cases</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Brand Meaning Section -->
-    <section id="meaning" class="brand-meaning">
-        <div class="container">
-            <h2 class="fade-in">تحليل الاسم</h2>
-            <div class="meaning-container">
-                <div class="meaning-box fade-in">
-                    <h3><i class="fas fa-robot"></i> Bot</h3>
-                    <p>يمثل الأتمتة، الذكاء الاصطناعي، الروبوتات البرمجية، الأنظمة الذكية، الرد الآلي، تحليل البيانات.</p>
-                    <ul class="meaning-list">
-                        <li>الأتمتة والذكاء الاصطناعي</li>
-                        <li>الروبوتات البرمجية</li>
-                        <li>الأنظمة الذكية</li>
-                        <li>الرد الآلي</li>
-                        <li>تحليل البيانات</li>
-                    </ul>
-                </div>
-                <div class="meaning-box fade-in">
-                    <h3><i class="fas fa-check-circle"></i> Done</h3>
-                    <p>تعني: منتهٍ، جاهز، مكتمل، مُنجز. كلمة قوية في عالم SaaS لأنها تعطي إحساسًا:</p>
-                    <ul class="meaning-list">
-                        <li>بالسرعة</li>
-                        <li>الكفاءة</li>
-                        <li>النتيجة النهائية</li>
-                        <li>الثقة</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- تم إصلاح هذه العبارة -->
-            <div class="brand-equation-container fade-in">
-                <div class="brand-equation">Bot + Done = Brand</div>
-            </div>
-            
-            <p class="text-center fade-in">اسم عالمي جاهز ليكون:</p>
-            <div class="brand-uses">
-                <div class="use-tag fade-in">منصة Bots</div>
-                <div class="use-tag fade-in">شركة SaaS</div>
-                <div class="use-tag fade-in">نظام أتمتة</div>
-                <div class="use-tag fade-in">AI Assistant</div>
-                <div class="use-tag fade-in">خدمة Workflow Automation</div>
-                <div class="use-tag fade-in">وكالة ذكاء اصطناعي</div>
-                <div class="use-tag fade-in">روبوتات محادثة ذكية</div>
-                <div class="use-tag fade-in">بوتات تداول</div>
-                <div class="use-tag fade-in">إدارة مهام</div>
-                <div class="use-tag fade-in">منصة تسويق آلي</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Use Cases Section -->
-    <section id="usecases" class="use-cases">
-        <div class="container">
-            <h2 class="fade-in">استعمالات الدومين</h2>
-            <div class="cases-grid">
-                <div class="case-card fade-in">
-                    <div class="case-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3>Automation Platform</h3>
-                    <p>منصة شاملة لأتمتة العمليات والأنظمة</p>
-                </div>
-                <div class="case-card fade-in">
-                    <div class="case-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <h3>AI Workflow Orchestration</h3>
-                    <p>تنظيم وتسيير سير العمل بالذكاء الاصطناعي</p>
-                </div>
-                <div class="case-card fade-in">
-                    <div class="case-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <h3>Chatbot Builder</h3>
-                    <p>منصة بناء روبوتات المحادثة الذكية</p>
-                </div>
-                <div class="case-card fade-in">
-                    <div class="case-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Trading Bots</h3>
-                    <p>أنظمة التداول الآلي بالذكاء الاصطناعي</p>
-                </div>
-                <div class="case-card fade-in">
-                    <div class="case-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3>Customer Support Bots</h3>
-                    <p>روبوتات دعم العملاء المتقدمة</p>
-                </div>
-                <div class="case-card fade-in">
-                    <div class="case-icon">
-                        <i class="fas fa-bullhorn"></i>
-                    </div>
-                    <h3>Marketing Automation</h3>
-                    <p>حلول التسويق الآلي المتكاملة</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Premium Domain Section -->
-    <section id="premium" class="premium-domain">
-        <div class="container">
-            <h2 class="fade-in">لماذا الاسم قوي؟</h2>
-            <div class="premium-content">
-                <p class="text-center fade-in">BotDone.com ليس مجرد دومين عادي، بل هو اسم استثنائي يمتلك مقومات النجاح العالمية في مجال التقنية والذكاء الاصطناعي.</p>
-                
-                <div class="premium-points">
-                    <div class="premium-point fade-in">
-                        <i class="fas fa-brain"></i>
-                        <h3>قصير وسهل التذكر</h3>
-                        <p>مكون من مقطعين فقط، سهل النطق والحفظ</p>
-                    </div>
-                    <div class="premium-point fade-in">
-                        <i class="fas fa-globe"></i>
-                        <h3>نطق عالمي</h3>
-                        <p>يمكن نطقه بسهولة في جميع اللغات</p>
-                    </div>
-                    <div class="premium-point fade-in">
-                        <i class="fas fa-expand"></i>
-                        <h3>قابل للتوسع</h3>
-                        <p>يناسب مشاريع متنوعة في مجال التقنية</p>
-                    </div>
-                    <div class="premium-point fade-in">
-                        <i class="fas fa-shapes"></i>
-                        <h3>غير محدد في نيش واحد</h3>
-                        <p>يتناسب مع مختلف مجالات الذكاء الاصطناعي</p>
-                    </div>
-                    <div class="premium-point fade-in">
-                        <i class="fas fa-rocket"></i>
-                        <h3>مناسب لمشاريع المستقبل</h3>
-                        <p>يواكب أحدث التطورات التقنية</p>
-                    </div>
-                    <div class="premium-point fade-in">
-                        <i class="fas fa-code"></i>
-                        <h3>سهل البرمجة والعلامة التجارية</h3>
-                        <p>اسم واضح وسهل الاستخدام في التطبيقات</p>
-                    </div>
-                    <div class="premium-point fade-in">
-                        <i class="fas fa-crown"></i>
-                        <h3>نطاق .COM الأصلي</h3>
-                        <p>النطاق الأكثر شهرة وثقة عالميًا</p>
-                    </div>
-                    <div class="premium-point fade-in">
-                        <i class="fas fa-building"></i>
-                        <h3>يصلح للشركات الناشئة الكبرى</h3>
-                        <p>اسم يليق بالشركات التقنية الطموحة</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Future Section -->
-    <section id="future" class="future-automation">
-        <div class="container">
-            <h2 class="fade-in">مستقبل المجال</h2>
-            <div class="future-content">
-                <p class="fade-in">عالم الأتمتة يتضاعف سنويًا، والذكاء الاصطناعي يشغل الشركات، والبوتات أصبحت جزءًا من كل صناعة. BotDone اسم يتماشى مع مستقبل لا يعتمد على البشر في تنفيذ المهام بالكامل، اسم مناسب للجيل الجديد من الأنظمة الذكية.</p>
-                
-                <div class="future-stats">
-                    <div class="stat fade-in">
-                        <div class="stat-number">20B+</div>
-                        <div class="stat-label">سوق الأتمتة بحلول 2026</div>
-                    </div>
-                    <div class="stat fade-in">
-                        <div class="stat-number">85%</div>
-                        <div class="stat-label">من التفاعلات مع العملاء ستكون آليًا</div>
-                    </div>
-                    <div class="stat fade-in">
-                        <div class="stat-number">70%</div>
-                        <div class="stat-label">من الشركات ستتبنى الذكاء الاصطناعي</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="fade-in">التواصل</h2>
-            <div class="contact-box fade-in">
-                <h3>للحصول على الدومين</h3>
-                <div class="contact-email">yac200508@gmail.com</div>
-                
-                <div class="social-links">
-                    <a href="https://instagram.com/yacine.sio" class="social-link" target="_blank">
-                        <i class="fab fa-instagram"></i>
-                        <span>yacine.sio</span>
-                    </a>
-                </div>
-                
-                <a href="mailto:yac200508@gmail.com" class="btn">Request Acquisition Price</a>
-                <p class="serious-note">Serious inquiries only.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-logo">Bot<span>Done</span>.com</div>
-            <p>Where Automation Gets Done</p>
-            <div class="copyright">© 2023 BotDone.com. All rights reserved.</div>
-        </div>
-    </footer>
+    <title>Bot Done - أنجز مهامك بكلمة</title>
+    <meta name="description" content="Bot Done: منصة الأتمتة الذكية. تحدث مع الـ AI ليقوم ببناء وتشغيل الأتمتة في سيرفراتك فوراً.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts (Cairo + IBM Plex Mono for code) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // إنشاء نمط الذكاء الاصطناعي في الخلفية
-            const aiPattern = document.getElementById('aiPattern');
-            const nodes = [];
-            const connections = [];
-            
-            // إنشاء العقد
-            for (let i = 0; i < 40; i++) {
-                const node = document.createElement('div');
-                node.className = 'ai-node';
-                
-                const x = Math.random() * 100;
-                const y = Math.random() * 100;
-                
-                node.style.left = `${x}%`;
-                node.style.top = `${y}%`;
-                node.style.animationDelay = `${Math.random() * 2}s`;
-                
-                aiPattern.appendChild(node);
-                nodes.push({x, y, element: node});
-            }
-            
-            // إنشاء الاتصالات
-            for (let i = 0; i < nodes.length; i++) {
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const distance = Math.sqrt(
-                        Math.pow(nodes[i].x - nodes[j].x, 2) + 
-                        Math.pow(nodes[i].y - nodes[j].y, 2)
-                    );
-                    
-                    if (distance < 20) {
-                        const connection = document.createElement('div');
-                        connection.className = 'ai-connection';
-                        
-                        const angle = Math.atan2(
-                            nodes[j].y - nodes[i].y, 
-                            nodes[j].x - nodes[i].x
-                        ) * 180 / Math.PI;
-                        
-                        connection.style.width = `${distance}%`;
-                        connection.style.left = `${nodes[i].x}%`;
-                        connection.style.top = `${nodes[i].y}%`;
-                        connection.style.transform = `rotate(${angle}deg)`;
-                        
-                        aiPattern.appendChild(connection);
-                        connections.push(connection);
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        mono: ['IBM Plex Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0B0E14',
+                            card: '#151A23',
+                            accent: '#FF6D5A', // n8n inspired orange
+                            purple: '#8B5CF6',
+                            blue: '#3B82F6',
+                            success: '#10B981'
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'typing': 'typing 3s steps(40, end)',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
                     }
                 }
             }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #0B0E14;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0E14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF6D5A;
+        }
+
+        .glass-effect {
+            background: rgba(21, 26, 35, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .glass-card-hover:hover {
+            border-color: rgba(255, 109, 90, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px -10px rgba(255, 109, 90, 0.1);
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #FF6D5A 0%, #A855F7 50%, #3B82F6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .code-typing::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* Chat Bubble Tail */
+        .chat-bubble-user {
+            border-bottom-left-radius: 0;
+        }
+        .chat-bubble-ai {
+            border-bottom-right-radius: 0;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen flex flex-col selection:bg-brand-accent selection:text-white">
+
+    <!-- Background Canvas -->
+    <canvas id="networkCanvas"></canvas>
+
+    <!-- Ambient Background Glows -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-20 left-0 w-[500px] h-[500px] bg-brand-purple/20 rounded-full blur-[100px] animate-blob"></div>
+        <div class="absolute top-1/3 right-0 w-[400px] h-[400px] bg-brand-accent/10 rounded-full blur-[100px] animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-40 left-1/3 w-[600px] h-[600px] bg-brand-blue/10 rounded-full blur-[120px] animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="relative z-40 w-full py-6 px-4 md:px-8 border-b border-white/5 bg-[#0B0E14]/80 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3 group cursor-pointer">
+                <div class="relative w-10 h-10 flex items-center justify-center">
+                    <div class="absolute inset-0 bg-gradient-to-br from-brand-accent to-brand-purple rounded-xl opacity-80 group-hover:opacity-100 transition blur-sm"></div>
+                    <div class="relative bg-[#0B0E14] w-[38px] h-[38px] rounded-lg flex items-center justify-center border border-white/10">
+                        <i data-lucide="bot" class="text-brand-accent w-6 h-6"></i>
+                    </div>
+                </div>
+                <span class="text-2xl font-black tracking-tighter text-white">Bot <span class="text-brand-accent">Done</span></span>
+            </div>
             
-            // تأثير التمرير للعناصر
-            const fadeElements = document.querySelectorAll('.fade-in');
+            <nav class="hidden md:flex gap-8 text-sm text-gray-400 font-medium">
+                <a href="#features" class="hover:text-white transition flex items-center gap-1"><i data-lucide="zap" class="w-4 h-4"></i> المميزات</a>
+                <a href="#library" class="hover:text-white transition flex items-center gap-1"><i data-lucide="layout-grid" class="w-4 h-4"></i> المكتبة</a>
+                <a href="#how-it-works" class="hover:text-white transition flex items-center gap-1"><i data-lucide="git-merge" class="w-4 h-4"></i> كيف يعمل؟</a>
+            </nav>
+
+            <a href="#join-waitlist" class="relative inline-flex group">
+                <div class="absolute transition-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"></div>
+                <button class="relative px-6 py-2 bg-black rounded-lg leading-none flex items-center divide-x divide-gray-600">
+                    <span class="text-gray-100 font-bold pl-2 group-hover:text-white transition">ابدأ مجاناً</span>
+                </button>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="relative z-10 flex-grow flex flex-col items-center pt-12 md:pt-20 pb-20 px-4 overflow-hidden">
+        
+        <!-- Hero Section -->
+        <div class="max-w-6xl mx-auto text-center space-y-8 relative">
             
-            const fadeInOnScroll = function() {
-                fadeElements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    const elementVisible = 150;
+            <!-- Status Badge -->
+            <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-4 hover:bg-white/10 transition cursor-default">
+                <span class="flex h-2 w-2 relative">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <span class="text-gray-300 text-xs font-bold tracking-wide">الإصدار 2.0 قادم قريباً</span>
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-[1.1] tracking-tight">
+                فقط تحدث... <br>
+                <span class="gradient-text">وسيتم الإنجاز.</span>
+            </h1>
+            
+            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light">
+                منصة <span class="text-white font-bold">Bot Done</span> تحول حديثك الطبيعي إلى أتمتة معقدة.
+                نربط واتساب، بريدك، وجداول بياناتك بذكاء اصطناعي يعمل داخل سيرفراتك.
+            </p>
+
+            <!-- Interactive Chat Demo (The "Creative" Part) -->
+            <div class="relative max-w-3xl mx-auto mt-12 mb-20 animate-float">
+                <!-- Glowing Border -->
+                <div class="absolute -inset-1 bg-gradient-to-r from-brand-accent to-brand-purple rounded-2xl blur opacity-30"></div>
+                
+                <!-- Chat Interface -->
+                <div class="relative bg-[#151A23] border border-gray-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[300px] md:h-[350px]">
+                    <!-- Window Header -->
+                    <div class="bg-[#0B0E14] border-b border-gray-800 px-4 py-3 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="text-xs text-gray-500 font-mono">bot-done-agent — active</div>
+                        <div></div>
+                    </div>
+
+                    <!-- Chat Area -->
+                    <div class="flex-1 p-6 font-mono text-sm overflow-hidden flex flex-col justify-end space-y-4" id="chatContainer">
+                        <!-- Messages will be injected by JS -->
+                    </div>
                     
-                    if (elementTop < window.innerHeight - elementVisible) {
-                        element.classList.add('visible');
-                    }
-                });
-            };
-            
-            window.addEventListener('scroll', fadeInOnScroll);
-            fadeInOnScroll(); // تشغيل مرة أولى عند التحميل
-            
-            // تحديث نقاط التنقل
-            function updateNavDots() {
-                const sections = document.querySelectorAll('section');
-                const navDots = document.querySelectorAll('.nav-dot');
-                
-                let currentSection = '';
-                
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (scrollY >= (sectionTop - sectionHeight / 3)) {
-                        currentSection = section.getAttribute('id');
-                    }
-                });
-                
-                navDots.forEach(dot => {
-                    dot.classList.remove('active');
-                    if (dot.getAttribute('onclick').includes(currentSection)) {
-                        dot.classList.add('active');
-                    }
-                });
+                    <!-- Input Area Mockup -->
+                    <div class="p-4 border-t border-gray-800 bg-[#0B0E14]/50">
+                        <div class="flex items-center gap-3">
+                            <div class="w-6 h-6 rounded-full bg-brand-accent/20 flex items-center justify-center">
+                                <i data-lucide="mic" class="w-3 h-3 text-brand-accent"></i>
+                            </div>
+                            <div class="h-2 w-24 bg-gray-700 rounded-full animate-pulse"></div>
+                            <div class="h-2 w-12 bg-gray-800 rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating Elements -->
+                <div class="absolute -right-12 top-10 hidden md:block bg-[#1E293B] p-3 rounded-xl border border-gray-700 shadow-xl transform rotate-6 animate-pulse">
+                    <i data-lucide="whatsapp" class="w-8 h-8 text-green-500"></i>
+                </div>
+                <div class="absolute -left-8 bottom-20 hidden md:block bg-[#1E293B] p-3 rounded-xl border border-gray-700 shadow-xl transform -rotate-12">
+                    <i data-lucide="database" class="w-8 h-8 text-blue-500"></i>
+                </div>
+            </div>
+
+            <!-- Countdown -->
+            <div class="flex flex-wrap justify-center gap-4 md:gap-8 items-center text-center mb-12">
+                <div>
+                    <span class="text-gray-500 text-xs uppercase tracking-widest mb-2 block">ينطلق خلال</span>
+                    <div class="flex gap-4">
+                        <div class="text-center">
+                            <div class="text-3xl md:text-4xl font-black font-mono text-white" id="days">00</div>
+                            <div class="text-[10px] text-gray-500 uppercase">يوم</div>
+                        </div>
+                        <span class="text-2xl text-gray-700">:</span>
+                        <div class="text-center">
+                            <div class="text-3xl md:text-4xl font-black font-mono text-white" id="hours">00</div>
+                            <div class="text-[10px] text-gray-500 uppercase">ساعة</div>
+                        </div>
+                        <span class="text-2xl text-gray-700">:</span>
+                        <div class="text-center">
+                            <div class="text-3xl md:text-4xl font-black font-mono text-brand-accent" id="minutes">00</div>
+                            <div class="text-[10px] text-gray-500 uppercase">دقيقة</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Waitlist Form -->
+            <div id="join-waitlist" class="w-full max-w-md mx-auto">
+                <form onsubmit="handleSubscribe(event)" class="relative z-10">
+                    <div class="flex flex-col gap-3">
+                        <div class="relative group">
+                            <div class="absolute -inset-0.5 bg-gradient-to-r from-brand-accent to-brand-purple rounded-xl blur opacity-30 group-hover:opacity-75 transition duration-500"></div>
+                            <input type="email" required placeholder="بريدك الإلكتروني..." 
+                                class="relative w-full bg-[#0B0E14] text-white border border-gray-700 placeholder-gray-600 px-5 py-4 rounded-xl focus:outline-none focus:border-brand-accent focus:ring-1 focus:ring-brand-accent transition text-center md:text-right">
+                        </div>
+                        <button type="submit" class="w-full bg-white text-black hover:bg-gray-200 font-bold py-4 rounded-xl transition shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] flex items-center justify-center gap-2">
+                            احجز مكانك واحصل على شهر مجاناً
+                            <i data-lucide="sparkles" class="w-4 h-4 text-yellow-600"></i>
+                        </button>
+                    </div>
+                </form>
+                <p class="text-xs text-gray-500 mt-4 flex items-center justify-center gap-1">
+                    <i data-lucide="lock" class="w-3 h-3"></i>
+                    بياناتك آمنة، لا رسائل مزعجة.
+                </p>
+            </div>
+        </div>
+
+        <!-- How It Works Section -->
+        <div id="how-it-works" class="max-w-7xl mx-auto mt-32 w-full">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">كيف يعمل <span class="text-brand-accent">Bot Done</span>؟</h2>
+                <p class="text-gray-400">ثلاث خطوات بسيطة تفصلك عن الأتمتة الكاملة</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                <!-- Connecting Line (Desktop) -->
+                <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-gray-700 to-transparent -z-10"></div>
+
+                <!-- Step 1 -->
+                <div class="bg-[#151A23] p-8 rounded-3xl border border-white/5 relative group hover:-translate-y-2 transition duration-300">
+                    <div class="w-14 h-14 bg-[#0B0E14] border border-gray-700 rounded-2xl flex items-center justify-center mb-6 text-brand-accent mx-auto relative z-10 group-hover:border-brand-accent transition-colors">
+                        <span class="font-mono text-xl font-bold">01</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-center">تحدث مع الـ Bot</h3>
+                    <p class="text-gray-400 text-sm text-center leading-relaxed">
+                        افتح الشات (Chat) واشرح ما تريد. مثال: "لما تجيني فاتورة على الإيميل، حط تفاصيلها في إكسل وأرسل لي واتساب".
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-[#151A23] p-8 rounded-3xl border border-white/5 relative group hover:-translate-y-2 transition duration-300">
+                    <div class="w-14 h-14 bg-[#0B0E14] border border-gray-700 rounded-2xl flex items-center justify-center mb-6 text-brand-purple mx-auto relative z-10 group-hover:border-brand-purple transition-colors">
+                        <span class="font-mono text-xl font-bold">02</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-center">البناء والاختبار</h3>
+                    <p class="text-gray-400 text-sm text-center leading-relaxed">
+                        يقوم الـ AI بإنشاء الـ Workflow تلقائياً، ويربط التطبيقات ببعضها، ويجري اختباراً وهمياً للتأكد من صحة العمليات أمام عينيك.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-[#151A23] p-8 rounded-3xl border border-white/5 relative group hover:-translate-y-2 transition duration-300">
+                    <div class="w-14 h-14 bg-[#0B0E14] border border-gray-700 rounded-2xl flex items-center justify-center mb-6 text-brand-blue mx-auto relative z-10 group-hover:border-brand-blue transition-colors">
+                        <span class="font-mono text-xl font-bold">03</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-center">نشر على سيرفرك</h3>
+                    <p class="text-gray-400 text-sm text-center leading-relaxed">
+                        بضغطة زر، يتم نشر الأتمتة كـ Docker Container داخل سيرفرات شركتك. بياناتك لا تغادر حدودك الرقمية أبداً.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div id="features" class="max-w-7xl mx-auto mt-32 w-full px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Main Feature: Chat Automation -->
+                <div class="lg:col-span-2 glass-effect p-8 rounded-3xl glass-card-hover transition duration-300 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-brand-accent/10 w-32 h-32 rounded-full blur-3xl"></div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-brand-accent/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="message-square-code" class="w-6 h-6 text-brand-accent"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold mb-3 text-white">شات الأتمتة الذكي</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                لا تحتاج لخبرة في n8n أو Zapier. نموذجنا اللغوي (LLM) المدرب خصيصاً يفهم لهجتك وسياق أعمالك. اطلب التعديلات، إصلاح الأخطاء، أو إنشاء مسارات عمل معقدة عبر واجهة محادثة بسيطة.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Library Feature -->
+                <div class="glass-effect p-8 rounded-3xl glass-card-hover transition duration-300">
+                    <div class="w-12 h-12 bg-brand-purple/20 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="blocks" class="w-6 h-6 text-brand-purple"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">مكتبة +5000 مشروع</h3>
+                    <p class="text-gray-400 text-sm">قوالب جاهزة لكل شيء: إدارة المخزون، خدمة العملاء، التسويق، والمزيد.</p>
+                </div>
+
+                <!-- Security Feature -->
+                <div class="glass-effect p-8 rounded-3xl glass-card-hover transition duration-300">
+                    <div class="w-12 h-12 bg-brand-blue/20 rounded-xl flex items-center justify-center mb-4">
+                        <i data-lucide="server" class="w-6 h-6 text-brand-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">سيادة البيانات</h3>
+                    <p class="text-gray-400 text-sm">أنت تملك الكود والبنية التحتية. نحن فقط نوفر الذكاء الذي يبنيها.</p>
+                </div>
+
+                <!-- Efficiency Feature -->
+                <div class="lg:col-span-2 glass-effect p-8 rounded-3xl glass-card-hover transition duration-300 flex flex-col md:flex-row items-center gap-8">
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold mb-3">خفض التكاليف والعمالة</h3>
+                        <p class="text-gray-400">
+                            الشركات التي تستخدم Bot Done تمكنت من خفض تكاليف التشغيل بنسبة 40% في الشهر الأول. دع الروبوتات تقوم بالعمل الروتين، ودع البشر يبدعون.
+                        </p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="text-center">
+                            <span class="block text-3xl font-bold text-white">40%</span>
+                            <span class="text-xs text-gray-500">توفير تكاليف</span>
+                        </div>
+                        <div class="w-px bg-gray-700"></div>
+                        <div class="text-center">
+                            <span class="block text-3xl font-bold text-white">24/7</span>
+                            <span class="text-xs text-gray-500">وقت تشغيل</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-white/5 bg-[#0B0E14] pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                         <i data-lucide="bot" class="text-brand-accent w-6 h-6"></i>
+                         <span class="text-2xl font-bold text-white">Bot Done</span>
+                    </div>
+                    <p class="text-gray-500 text-sm max-w-xs leading-relaxed">
+                        المنصة الأولى عربياً لأتمتة الأعمال عبر المحادثة. نجعل التكنولوجيا المعقدة في متناول الجميع بكلمة واحدة.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">روابط سريعة</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-brand-accent transition">عن Bot Done</a></li>
+                        <li><a href="#" class="hover:text-brand-accent transition">المكتبة</a></li>
+                        <li><a href="#" class="hover:text-brand-accent transition">الأسعار</a></li>
+                        <li><a href="#" class="hover:text-brand-accent transition">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">قانوني</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-brand-accent transition">الشروط والأحكام</a></li>
+                        <li><a href="#" class="hover:text-brand-accent transition">سياسة الخصوصية</a></li>
+                        <li><a href="#" class="hover:text-brand-accent transition">أمن المعلومات</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600">
+                <p>© 2025 Bot Done Inc. جميع الحقوق محفوظة.</p>
+                <div class="flex gap-4">
+                    <i data-lucide="twitter" class="w-4 h-4 hover:text-white cursor-pointer transition"></i>
+                    <i data-lucide="linkedin" class="w-4 h-4 hover:text-white cursor-pointer transition"></i>
+                    <i data-lucide="instagram" class="w-4 h-4 hover:text-white cursor-pointer transition"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center px-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="closeModal()"></div>
+        <div class="bg-[#151A23] border border-brand-accent/30 p-8 rounded-3xl shadow-2xl max-w-md w-full relative transform scale-95 transition-transform duration-300 text-center" id="modalContent">
+            <div class="w-20 h-20 bg-gradient-to-tr from-green-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-green-500/20">
+                <i data-lucide="party-popper" class="w-10 h-10 text-white"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-white mb-2">أهلاً بك في المستقبل!</h3>
+            <p class="text-gray-400 mb-8">تم حجز مقعدك بنجاح. سنرسل لك دعوة حصرية لتجربة <span class="text-brand-accent font-bold">Bot Done Pro</span> فور الإطلاق.</p>
+            <button onclick="closeModal()" class="w-full bg-white text-black hover:bg-gray-200 py-3.5 rounded-xl font-bold transition">رائع، شكراً!</button>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // --- Chat Animation Logic ---
+        const chatContainer = document.getElementById('chatContainer');
+        const messages = [
+            { text: "أهلاً! كيف أقدر أساعدك في أتمتة شغلك اليوم؟", type: "ai", delay: 500 },
+            { text: "عندي متجر إلكتروني. أبغى لما تجيني طلبية جديدة، تنرسل رسالة واتساب للعميل وتتسجل في جوجل شيت.", type: "user", delay: 2000 },
+            { text: "جاري تحليل الطلب... 🤖", type: "ai", delay: 1000 },
+            { text: "تم! 🚀 سويت لك Workflow يربط (WooCommerce + WhatsApp API + Google Sheets). تبغى تشوفه وتجربه؟", type: "ai", delay: 2500 }
+        ];
+
+        let msgIndex = 0;
+
+        function typeWriter(text, element, speed = 30) {
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
             }
+            type();
+        }
+
+        function addMessage(msg) {
+            const div = document.createElement('div');
+            const isAi = msg.type === 'ai';
             
-            window.addEventListener('scroll', updateNavDots);
+            div.className = `flex w-full ${isAi ? 'justify-start' : 'justify-end'} opacity-0 transform translate-y-4 transition-all duration-500`;
             
-            // وظيفة التمرير إلى القسم
-            window.scrollToSection = function(sectionId) {
-                document.getElementById(sectionId).scrollIntoView({
-                    behavior: 'smooth'
-                });
+            const bubble = document.createElement('div');
+            bubble.className = `max-w-[85%] p-3 rounded-2xl text-xs md:text-sm ${
+                isAi 
+                ? 'bg-[#1E293B] text-gray-200 chat-bubble-ai border border-gray-700' 
+                : 'bg-brand-accent text-white chat-bubble-user shadow-lg shadow-brand-accent/20'
+            }`;
+            
+            div.appendChild(bubble);
+            chatContainer.appendChild(div);
+
+            // Trigger reflow
+            setTimeout(() => {
+                div.classList.remove('opacity-0', 'translate-y-4');
+                // Scrolling
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 10);
+
+            // Typing effect for AI
+            if (isAi) {
+                const cursorSpan = document.createElement('span');
+                // cursorSpan.className = 'code-typing';
+                bubble.appendChild(cursorSpan);
+                typeWriter(msg.text, bubble); 
+            } else {
+                bubble.innerText = msg.text;
             }
-        });
+        }
+
+        function playChatSequence() {
+            if (msgIndex < messages.length) {
+                const msg = messages[msgIndex];
+                setTimeout(() => {
+                    addMessage(msg);
+                    msgIndex++;
+                    playChatSequence();
+                }, msg.delay);
+            } else {
+                // Loop chat after delay
+                setTimeout(() => {
+                    chatContainer.innerHTML = '';
+                    msgIndex = 0;
+                    playChatSequence();
+                }, 5000);
+            }
+        }
+
+        // Start Chat Animation when visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && msgIndex === 0) {
+                    playChatSequence();
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(document.querySelector('.max-w-6xl'));
+
+
+        // --- Countdown Logic ---
+        const launchDate = new Date();
+        launchDate.setDate(launchDate.getDate() + 60); 
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("days").innerText = String(days).padStart(2, '0');
+            document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // --- Modal Logic ---
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const modal = document.getElementById('successModal');
+            const modalContent = document.getElementById('modalContent');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+            e.target.reset();
+        }
+        function closeModal() {
+            const modal = document.getElementById('successModal');
+            const modalContent = document.getElementById('modalContent');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+        }
+
+        // --- Particles (Optimized) ---
+        const canvas = document.getElementById('networkCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles = [];
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.3;
+                this.vy = (Math.random() - 0.5) * 0.3;
+                this.size = Math.random() * 1.5 + 0.5;
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = '#475569';
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(Math.floor(width * height / 20000), 60); 
+            for (let i = 0; i < count; i++) particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach((p, i) => {
+                p.update();
+                p.draw();
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = p.x - particles[j].x;
+                    const dy = p.y - particles[j].y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(59, 130, 246, ${0.15 - dist/800})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', () => { resize(); initParticles(); });
+        resize(); initParticles(); animateParticles();
+
     </script>
 </body>
 </html>
